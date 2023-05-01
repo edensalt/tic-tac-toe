@@ -1,3 +1,5 @@
+import { addPlayer2Form } from "./player2form";
+
 // GAME BOARD
 
 const gameBoard = (function () {
@@ -5,9 +7,9 @@ const gameBoard = (function () {
   const columns = 3;
   const board = [];
 
-  for (i = 0; i < rows; i++) {
+  for (let i = 0; i < rows; i++) {
     board[i] = [];
-    for (j = 0; j < columns; j++) {
+    for (let j = 0; j < columns; j++) {
       board[i][j] = "";
     }
   }
@@ -20,7 +22,7 @@ const gameBoard = (function () {
 // PLAYERS
 
 const Players = function () {
-  players = [];
+  let players = [];
 
   function playerFactory(playerName, symbol) {
     return {
@@ -29,30 +31,50 @@ const Players = function () {
     };
   }
 
+  const form1 = document.querySelector("#player-one-form");
+
   // Add player 1
 
-  const form = document.querySelector("#player-one-form");
-  form.addEventListener("submit", function (e) {
+  form1.addEventListener("submit", function (e) {
     e.preventDefault();
     const nameInput = document.querySelector("#player1-name");
-    const symbolInput = document.querySelector('input[name="symbol"]:checked');
+    const symbolInput = document.querySelector('input[name="symbol1"]:checked');
     const name = nameInput.value;
     const symbol = symbolInput.value;
     const newPlayer = playerFactory(name, symbol);
     players.push(newPlayer);
     console.table(players);
-    welcomePlayer();
+    welcomePlayer1();
+    addForm2();
   });
 
-  // Add player 2
+  // Remove form for player1
 
-  // Remove form
-
-  function welcomePlayer() {
-    form.remove();
+  function welcomePlayer1() {
+    form1.remove();
     const container = document.querySelector(".player1side");
     const welcome = document.createElement("h3");
-    welcome.textContent = `Welcome to the game, ${players[0].name}!`;
+    welcome.textContent = `Welcome to the game, ${players[0].name}! Your symbol is ${players[0].symbol}.`;
+    container.appendChild(welcome);
+  }
+
+  // Add player 2 form
+
+  function addForm2() {
+    const side2 = document.querySelector(".player2side");
+    while (side2.firstChild) {
+      side2.removeChild(side2.firstChild);
+    }
+    side2.appendChild(addPlayer2Form());
+  }
+
+  // Determine player 2 type
+
+  function welcomePlayer2() {
+    form2.remove();
+    const container = document.querySelector(".player1side");
+    const welcome = document.createElement("h3");
+    welcome.textContent = `Welcome to the game, ${players[1].name}!`;
     container.appendChild(welcome);
   }
 

@@ -15,18 +15,20 @@
           <label for="name">name</label>
           <input type="text" id="player1-name" name="name" />
           <fieldset>
-              <legend>symbol</legend>
-              <input type="radio" id="x" name="symbol" value="x" />
-              <label for="x">x</label>
-              <input type="radio" id="o" name="symbol" value="o" />
-              <label for="o">o</label>
+            <legend>symbol</legend>
+            <input type="radio" id="x" name="symbol1" value="x" />
+            <label for="x">x</label>
+            <input type="radio" id="o" name="symbol1" value="o" />
+            <label for="o">o</label>
           </fieldset>
           <button type="submit" id="player1">Add player 1</button>
         </form>
       </div>
       <div id="board"></div>
-      <button>Add player 2</button>
+      <div class="player2side">
+        <h3>Waiting for player 1</h3>
+      </div>
     </div>
   </body>
-  <script src="app.js"></script>
+  <script type="module" src="app.js"></script>
 </html>
