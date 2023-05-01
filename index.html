@@ -10,18 +10,20 @@
   <body>
     <h1>Tic Tac Toe</h1>
     <div class="players-board">
-      <form>
-        <label for="name">name</label>
-        <input type="text" id="name" name="name" />
-        <fieldset>
-            <legend>symbol</legend>
-            <input type="radio" id="x" name="symbol" value="x" />
-            <label for="x">x</label>
-            <input type="radio" id="o" name="symbol" value="o" />
-            <label for="o">o</label>
-        </fieldset>
-        <button type="submit" id="player1">Add player 1</button>
-      </form>
+      <div class="player1side">
+        <form id="player-one-form">
+          <label for="name">name</label>
+          <input type="text" id="player1-name" name="name" />
+          <fieldset>
+              <legend>symbol</legend>
+              <input type="radio" id="x" name="symbol" value="x" />
+              <label for="x">x</label>
+              <input type="radio" id="o" name="symbol" value="o" />
+              <label for="o">o</label>
+          </fieldset>
+          <button type="submit" id="player1">Add player 1</button>
+        </form>
+      </div>
       <div id="board"></div>
       <button>Add player 2</button>
     </div>
