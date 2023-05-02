@@ -19,43 +19,47 @@ const gameBoard = (function () {
 
 // PLAYERS
 
-const Players = function () {
+const playersArr = [];
 
-  function playerFactory(playerName, symbol) {
-    return { playerName, symbol };
-  }
+const Player = (playerName, playerSymbol) => {
+  const getName = () => playerName;
+  const getSymbol = () => playerSymbol;
+  const player = { name: playerName, symbol: playerSymbol };
+  playersArr.push(player);
 
-  let player1 = playerFactory("Eden", "x");
-  let player2 = playerFactory("Ben", "o");
-
-  const players = [player1, player2];
-
-  return { players };
+  return { getName, getSymbol };
 };
-
-const players = Players();
 
 // GAME CONTROLLER
 
 const gameController = (function () {
   const board = gameBoard.getBoard();
-  const players = Players().players;
 
-  let activePlayer = players[0];
-
-  const switchPlayerTurn = () => {
-    activePlayer = activePlayer === players[0] ? players[1] : players[0];
-  };
-
-  const getActivePlayer = () => activePlayer;
+  let currentPlayerIndex = 0;
+  let round = 1;
 
   const playRound = (cellRow, cellColumn) => {
+    if (round % 2 === 0) {
+      currentPlayerIndex = 1;
+    } else currentPlayerIndex = 0;
+
+    function getCurrentPlayerName() {
+      const currentPlayer = playersArr[currentPlayerIndex];
+      return currentPlayer.name;
+    }
+
+    function getCurrentPlayerSymbol() {
+      const currentPlayer = playersArr[currentPlayerIndex];
+      return currentPlayer.symbol;
+    }
+
     if (
       board[cellRow][cellColumn] === "x" ||
       board[cellRow][cellColumn] === "o"
     )
       return;
-    board[cellRow][cellColumn] = getActivePlayer().symbol;
+    board[cellRow][cellColumn] = getCurrentPlayerSymbol();
+    round++;
 
     // Announce winner
 
@@ -70,7 +74,7 @@ const gameController = (function () {
           board[i][1] === board[i][2] &&
           board[i][0] !== ""
         ) {
-          return getActivePlayer().playerName;
+          return getCurrentPlayerName();
         }
       }
 
@@ -82,7 +86,7 @@ const gameController = (function () {
           board[1][i] === board[2][i] &&
           board[0][i] !== ""
         ) {
-          return getActivePlayer().playerName;
+          return getCurrentPlayerName();
         }
       }
 
@@ -93,7 +97,7 @@ const gameController = (function () {
         board[1][1] === board[2][2] &&
         board[1][1] !== ""
       ) {
-        return getActivePlayer().playerName;
+        return getCurrentPlayerName();
       }
 
       // Winner to diagonal bottom left
@@ -103,16 +107,15 @@ const gameController = (function () {
         board[1][1] === board[2][0] &&
         board[1][1] !== ""
       ) {
-        return getActivePlayer().playerName;
+        return getCurrentPlayerName();
       }
 
       return false;
     };
     console.log(decideWinner());
-    switchPlayerTurn();
   };
 
-  return { getActivePlayer, playRound, getActivePlayer };
+  return { playRound };
 })();
 
 // DISPLAY CONTROLLER
@@ -147,4 +150,59 @@ const displayController = (function () {
   }
 
   updateBoard();
+})();
+
+// PLAYERS
+
+const getPLayers = (function () {
+  const form1 = document.querySelector("#player-one-form");
+  const form2 = document.querySelector("#player-two-form");
+  const waitingMessage = document.querySelector("#waiting-message");
+  form2.style.display = "none";
+
+  // Add player 1
+
+  form1.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const nameInput = document.querySelector("#player-one-name");
+    const symbolInput = document.querySelector(
+      'input[name="player-one-symbol"]:checked'
+    );
+    const name = nameInput.value;
+    const symbol = symbolInput.value;
+    Player(name, symbol);
+    welcomePlayer1();
+    waitingMessage.remove();
+    form2.style.display = "block";
+  });
+
+  // Remove form for player1
+
+  function welcomePlayer1() {
+    form1.style.display = "none";
+    const container = document.querySelector(".player1side");
+    const welcome = document.createElement("h3");
+    welcome.textContent = `Welcome to the game, ${playersArr[0].name}! Your symbol is ${playersArr[0].symbol}.`;
+    container.appendChild(welcome);
+  }
+
+  form2.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const nameInput = document.querySelector("#player-two-name");
+    const name = nameInput.value;
+    let symbol;
+    if (playersArr[0].symbol == "x") {
+      symbol = "o";
+    } else symbol = "x";
+    Player(name, symbol);
+    welcomePlayer2();
+  });
+
+  function welcomePlayer2() {
+    form2.style.display = "none";
+    const container = document.querySelector(".player2side");
+    const welcome = document.createElement("h3");
+    welcome.textContent = `Welcome to the game, ${playersArr[1].name}! Your symbol is ${playersArr[1].symbol}.`;
+    container.appendChild(welcome);
+  }
 })();
