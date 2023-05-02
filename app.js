@@ -35,13 +35,17 @@ const Player = (playerName, playerSymbol) => {
 const gameController = (function () {
   const board = gameBoard.getBoard();
 
-  let currentPlayerIndex = 0;
+  let currentPlayerIndex;
   let round = 1;
 
   const playRound = (cellRow, cellColumn) => {
-    if (round % 2 === 0) {
-      currentPlayerIndex = 1;
-    } else currentPlayerIndex = 0;
+
+
+    if (round === 1 && playersArr[0].symbol === 'x' || playersArr[0].symbol === 'x' && round % 2 !== 0) {
+      currentPlayerIndex = 0
+    } else if (playersArr[0].symbol === 'o' && round % 2 === 0) {
+      currentPlayerIndex = 0
+    } else currentPlayerIndex = 1
 
     function getCurrentPlayerName() {
       const currentPlayer = playersArr[currentPlayerIndex];
@@ -61,6 +65,7 @@ const gameController = (function () {
       return;
     board[cellRow][cellColumn] = getCurrentPlayerSymbol();
     round++;
+    console.log(round);
 
     // Announce winner
 
@@ -74,10 +79,7 @@ const gameController = (function () {
         const title = document.querySelector("#title");
         const h1 = document.createElement("h1");
         h1.innerHTML = `Congratulations! <br />${getCurrentPlayerName()} won!`;
-        h1.classList.add(
-          "pt-6",
-          "text-7xl"
-        )
+        h1.classList.add("pt-6", "text-7xl");
         const btn = document.createElement("button");
         btn.textContent = "Play again?";
         btn.classList.add(
@@ -265,15 +267,12 @@ const displayController = (function () {
       form2.style.display = "block";
       const playerTwoSymbol = document.querySelector("#player-two-symbol");
       para = document.createElement("p");
-      para.classList.add(
-        'text-sm',
-        'font-medium',
-        'leading-6',
-        'text-rose-50'
-      )
-      if (playersArr[0].symbol === 'x') {
-        para.innerHTML = `Your symbol is o.`
-      } else {para.innerHTML = `Your symbol is x.`}
+      para.classList.add("text-sm", "font-medium", "leading-6", "text-rose-50");
+      if (playersArr[0].symbol === "o") {
+        para.innerHTML = `Your symbol is x.`;
+      } else {
+        para.innerHTML = `Your symbol is o.`;
+      }
       playerTwoSymbol.appendChild(para);
     });
 
