@@ -64,7 +64,6 @@ const gameController = (function () {
     // Announce winner
 
     const decideWinner = () => {
-        
       const boardRows = board.length;
 
       // Function to remove board and declare winner
@@ -156,6 +155,42 @@ const displayController = (function () {
         cellButton.textContent = cell;
         cellButton.dataset.row = rowIndex;
         cellButton.dataset.column = columnIndex;
+        cellButton.classList.add(
+          "rounded-none",
+          "bg-blue-200",
+          "border-2",
+          "border-solid",
+          "h-full",
+          "w-full",
+          "bg-blue-400",
+          "hover:bg-rose-200"
+        );
+
+        if (rowIndex === 0) {
+          cellButton.classList.add("border-t-0");
+          if (columnIndex === 0) {
+            cellButton.classList.add('rounded-tl-lg')
+          }
+        }
+        if (rowIndex === 2) {
+          cellButton.classList.add("border-b-0");
+          if (columnIndex === 2) {
+            cellButton.classList.add('rounded-br-lg')
+          }
+        }
+        if (columnIndex === 0) {
+          cellButton.classList.add("border-l-0");
+          if (rowIndex === 2) {
+            cellButton.classList.add('rounded-bl-lg')
+          }
+        }
+        if (columnIndex === 2) {
+          cellButton.classList.add("border-r-0");
+          if (rowIndex === 0) {
+            cellButton.classList.add('rounded-tr-lg')
+          }
+        }
+
         cellButton.addEventListener("click", handleClick);
         boardDiv.appendChild(cellButton);
       });
@@ -202,7 +237,7 @@ const getPLayers = (function () {
 
   function welcomePlayer1() {
     form1.style.display = "none";
-    const container = document.querySelector(".player1side");
+    const container = document.querySelector("#player1side");
     const welcome = document.createElement("h3");
     welcome.textContent = `Welcome to the game, ${playersArr[0].name}! Your symbol is ${playersArr[0].symbol}.`;
     container.appendChild(welcome);
@@ -222,7 +257,7 @@ const getPLayers = (function () {
 
   function welcomePlayer2() {
     form2.style.display = "none";
-    const container = document.querySelector(".player2side");
+    const container = document.querySelector("#player2side");
     const welcome = document.createElement("h3");
     welcome.textContent = `Welcome to the game, ${playersArr[1].name}! Your symbol is ${playersArr[1].symbol}.`;
     container.appendChild(welcome);
