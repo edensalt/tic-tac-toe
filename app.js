@@ -163,7 +163,9 @@ const displayController = (function () {
           "h-full",
           "w-full",
           "bg-blue-400",
-          "hover:bg-rose-200"
+          "hover:bg-rose-200",
+          "font-symbols",
+          "text-3xl"
         );
 
         if (rowIndex === 0) {
