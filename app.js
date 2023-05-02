@@ -1,5 +1,3 @@
-import { addPlayer2Form } from "./player2form";
-
 // GAME BOARD
 
 const gameBoard = (function () {
@@ -22,64 +20,74 @@ const gameBoard = (function () {
 // PLAYERS
 
 const Players = function () {
-  let players = [];
+  //   const form1 = document.querySelector("#player-one-form");
+  //   const form2 = document.querySelector("#player-two-form");
+  //   const waitingMessage = document.querySelector(".waiting-message");
+  //   form2.style.display = "none";
+
+  //   // Add player 1
+
+  //   form1.addEventListener("submit", function (e) {
+  //     e.preventDefault();
+  //     const nameInput = document.querySelector("#player1-name");
+  //     const symbolInput = document.querySelector('input[name="symbol1"]:checked');
+  //     const name = nameInput.value;
+  //     const symbol = symbolInput.value;
+  //     const newPlayer = playerFactory(name, symbol);
+  //     players.push(newPlayer);
+  //     console.table(players);
+  //     welcomePlayer1();
+  //     waitingMessage.remove();
+  //     form2.style.display = "block";
+  //   });
+
+  //   // Remove form for player1
+
+  //   function welcomePlayer1() {
+  //     form1.remove();
+  //     const container = document.querySelector(".player1side");
+  //     const welcome = document.createElement("h3");
+  //     welcome.textContent = `Welcome to the game, ${players[0].name}! Your symbol is ${players[0].symbol}.`;
+  //     container.appendChild(welcome);
+  //   }
+
+  //   form2.addEventListener("submit", function (e) {
+  //     e.preventDefault();
+  //     const nameInput = document.querySelector("#player2-name");
+  //     const name = nameInput.value;
+  //     let symbol;
+  //     if (players[0].symbol == "x") {
+  //       symbol = "o";
+  //     } else symbol = "x";
+  //     const newPlayer = playerFactory(name, symbol);
+  //     players.push(newPlayer);
+  //     console.table(players);
+  //     welcomePlayer2();
+  //   });
+
+  //   function welcomePlayer2() {
+  //     form2.style.display = "none";
+  //     const container = document.querySelector(".player2side");
+  //     const welcome = document.createElement("h3");
+  //     welcome.textContent = `Welcome to the game, ${players[1].name}! Your symbol is ${players[1].symbol}.`;
+  //     container.appendChild(welcome);
+  //   }
+
+  //   return players;
 
   function playerFactory(playerName, symbol) {
-    return {
-      name: playerName,
-      symbol: symbol,
-    };
+    return { playerName, symbol };
   }
 
-  const form1 = document.querySelector("#player-one-form");
+  let player1 = playerFactory("Eden", "x");
+  let player2 = playerFactory("Ben", "o");
 
-  // Add player 1
-
-  form1.addEventListener("submit", function (e) {
-    e.preventDefault();
-    const nameInput = document.querySelector("#player1-name");
-    const symbolInput = document.querySelector('input[name="symbol1"]:checked');
-    const name = nameInput.value;
-    const symbol = symbolInput.value;
-    const newPlayer = playerFactory(name, symbol);
-    players.push(newPlayer);
-    console.table(players);
-    welcomePlayer1();
-    addForm2();
-  });
-
-  // Remove form for player1
-
-  function welcomePlayer1() {
-    form1.remove();
-    const container = document.querySelector(".player1side");
-    const welcome = document.createElement("h3");
-    welcome.textContent = `Welcome to the game, ${players[0].name}! Your symbol is ${players[0].symbol}.`;
-    container.appendChild(welcome);
-  }
-
-  // Add player 2 form
-
-  function addForm2() {
-    const side2 = document.querySelector(".player2side");
-    while (side2.firstChild) {
-      side2.removeChild(side2.firstChild);
-    }
-    side2.appendChild(addPlayer2Form());
-  }
-
-  // Determine player 2 type
-
-  function welcomePlayer2() {
-    form2.remove();
-    const container = document.querySelector(".player1side");
-    const welcome = document.createElement("h3");
-    welcome.textContent = `Welcome to the game, ${players[1].name}!`;
-    container.appendChild(welcome);
-  }
+  const players = [player1, player2];
 
   return { players };
 };
+
+const players = Players();
 
 // GAME CONTROLLER
 
