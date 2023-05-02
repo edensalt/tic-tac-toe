@@ -21,13 +21,14 @@ const gameBoard = (function () {
 
 const playersArr = [];
 
-const Player = (playerName, playerSymbol) => {
+const Player = (playerName, playerSymbol, playerType) => {
   const getName = () => playerName;
   const getSymbol = () => playerSymbol;
-  const player = { name: playerName, symbol: playerSymbol };
+  const getType = () => playerType;
+  const player = { name: playerName, symbol: playerSymbol, type: playerType };
   playersArr.push(player);
 
-  return { getName, getSymbol };
+  return { getName, getSymbol, getType };
 };
 
 // GAME CONTROLLER: Select a square, determine current player, determine winner
@@ -39,13 +40,14 @@ const gameController = (function () {
   let round = 1;
 
   const playRound = (cellRow, cellColumn) => {
-``
-
-    if (round === 1 && playersArr[0].symbol === 'x' || playersArr[0].symbol === 'x' && round % 2 !== 0) {
-      currentPlayerIndex = 0
-    } else if (playersArr[0].symbol === 'o' && round % 2 === 0) {
-      currentPlayerIndex = 0
-    } else currentPlayerIndex = 1
+    if (
+      (round === 1 && playersArr[0].symbol === "x") ||
+      (playersArr[0].symbol === "x" && round % 2 !== 0)
+    ) {
+      currentPlayerIndex = 0;
+    } else if (playersArr[0].symbol === "o" && round % 2 === 0) {
+      currentPlayerIndex = 0;
+    } else currentPlayerIndex = 1;
 
     function getCurrentPlayerName() {
       const currentPlayer = playersArr[currentPlayerIndex];
@@ -63,7 +65,13 @@ const gameController = (function () {
       typeof playersArr[1] === "undefined"
     )
       return;
-    board[cellRow][cellColumn] = getCurrentPlayerSymbol();
+
+    // when the player is a human
+    if (playersArr[1].type === "human") {
+      board[cellRow][cellColumn] = getCurrentPlayerSymbol();
+    }
+
+    //
     round++;
     console.log(round);
 
@@ -115,7 +123,7 @@ const gameController = (function () {
         h1.classList.add("pt-6", "text-7xl");
         const btn = document.createElement("button");
         btn.textContent = "Play again?";
-    
+
         btn.addEventListener("click", function () {
           location.reload();
         });
@@ -174,12 +182,12 @@ const gameController = (function () {
         return getCurrentPlayerName();
       }
 
-       // Tie conditions
+      // Tie conditions
 
-       if (round === 10) {
+      if (round === 10) {
         displayTie();
         return getCurrentPlayerName();
-       }
+      }
 
       return false;
     };
@@ -215,7 +223,8 @@ const displayController = (function () {
           "bg-indigo-400",
           "hover:bg-rose-200/60",
           "font-symbols",
-          "text-3xl"
+          "text-3xl",
+          "text-slate-800"
         );
 
         if (rowIndex === 0) {
@@ -274,7 +283,7 @@ const displayController = (function () {
   const getPLayers = (function () {
     const form1 = document.querySelector("#player-one-form");
     const form2 = document.querySelector("#player-two-form");
-    const player2Selection = document.querySelector("#player-two-selection")
+    const player2Selection = document.querySelector("#player-two-selection");
     const waitingMessage = document.querySelector("#waiting-message");
     form2.style.display = "none";
     player2Selection.style.display = "none";
@@ -289,7 +298,8 @@ const displayController = (function () {
       );
       const name = nameInput.value;
       const symbol = symbolInput.value;
-      Player(name, symbol);
+      const type = "human";
+      Player(name, symbol, type);
       welcomePlayer1();
       waitingMessage.remove();
       player2Selection.style.display = "flex";
@@ -331,7 +341,7 @@ const displayController = (function () {
         para.innerHTML = `Your symbol is o.`;
       }
       playerTwoSymbol.appendChild(para);
-    })
+    });
 
     // Add player 2
 
@@ -343,7 +353,8 @@ const displayController = (function () {
       if (playersArr[0].symbol == "x") {
         symbol = "o";
       } else symbol = "x";
-      Player(name, symbol);
+      const type = "human";
+      Player(name, symbol, type);
       welcomePlayer2();
     });
 
