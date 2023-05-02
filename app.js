@@ -1,4 +1,4 @@
-// GAME BOARD
+// GAME BOARD ARRAY
 
 const gameBoard = (function () {
   const rows = 3;
@@ -17,7 +17,7 @@ const gameBoard = (function () {
   return { getBoard };
 })();
 
-// PLAYERS
+// PLAYER FACTORY
 
 const playersArr = [];
 
@@ -30,7 +30,7 @@ const Player = (playerName, playerSymbol) => {
   return { getName, getSymbol };
 };
 
-// GAME CONTROLLER
+// GAME CONTROLLER: Select a square, determine current player, determine winner
 
 const gameController = (function () {
   const board = gameBoard.getBoard();
@@ -66,7 +66,7 @@ const gameController = (function () {
     const decideWinner = () => {
       const boardRows = board.length;
 
-      // Function to remove board and declare winner
+      // Remove board and declare winner
 
       function displayWinner() {
         const container = document.querySelector("#players-board");
@@ -82,6 +82,8 @@ const gameController = (function () {
         title.appendChild(h1);
         title.appendChild(btn);
       }
+
+      // Win conditions
 
       // Winner across a row
 
@@ -120,7 +122,7 @@ const gameController = (function () {
         return getCurrentPlayerName();
       }
 
-      // Winner to diagonal bottom left
+      // Winner diagonal to bottom left
 
       if (
         board[2][0] === board[1][1] &&
@@ -146,6 +148,7 @@ const displayController = (function () {
   const board = gameBoard.getBoard();
 
   // Render the board
+
   function updateBoard() {
     boardDiv.textContent = "";
 
@@ -157,13 +160,12 @@ const displayController = (function () {
         cellButton.dataset.column = columnIndex;
         cellButton.classList.add(
           "rounded-none",
-          "bg-blue-200",
           "border-2",
           "border-solid",
           "h-full",
           "w-full",
-          "bg-blue-400",
-          "hover:bg-rose-200",
+          "bg-indigo-400",
+          "hover:bg-rose-200/60",
           "font-symbols",
           "text-3xl"
         );
@@ -193,6 +195,10 @@ const displayController = (function () {
           }
         }
 
+        if (cellButton.textContent === 'x' || cellButton.textContent === 'o') {
+          cellButton.classList.remove("hover:bg-rose-200/60");
+        }
+
         cellButton.addEventListener("click", handleClick);
         boardDiv.appendChild(cellButton);
       });
@@ -200,6 +206,7 @@ const displayController = (function () {
   }
 
   // Add event listener for selecting square
+
   function handleClick(e) {
     e.preventDefault;
     const cellRow = parseInt(e.target.getAttribute("data-row"));
@@ -211,7 +218,7 @@ const displayController = (function () {
   updateBoard();
 })();
 
-// PLAYERS
+// PLAYER FORMS
 
 const getPLayers = (function () {
   const form1 = document.querySelector("#player-one-form");
@@ -235,7 +242,7 @@ const getPLayers = (function () {
     form2.style.display = "block";
   });
 
-  // Remove form for player1
+  // Welcome player 1 and remove form
 
   function welcomePlayer1() {
     form1.style.display = "none";
@@ -253,6 +260,8 @@ const getPLayers = (function () {
     container.appendChild(welcome);
   }
 
+  // Add player 2
+
   form2.addEventListener("submit", function (e) {
     e.preventDefault();
     const nameInput = document.querySelector("#player-two-name");
@@ -264,6 +273,8 @@ const getPLayers = (function () {
     Player(name, symbol);
     welcomePlayer2();
   });
+
+  // Welcome player 2 and remove form
 
   function welcomePlayer2() {
     form2.style.display = "none";
