@@ -169,25 +169,25 @@ const displayController = (function () {
         if (rowIndex === 0) {
           cellButton.classList.add("border-t-0");
           if (columnIndex === 0) {
-            cellButton.classList.add('rounded-tl-lg')
+            cellButton.classList.add("rounded-tl-lg");
           }
         }
         if (rowIndex === 2) {
           cellButton.classList.add("border-b-0");
           if (columnIndex === 2) {
-            cellButton.classList.add('rounded-br-lg')
+            cellButton.classList.add("rounded-br-lg");
           }
         }
         if (columnIndex === 0) {
           cellButton.classList.add("border-l-0");
           if (rowIndex === 2) {
-            cellButton.classList.add('rounded-bl-lg')
+            cellButton.classList.add("rounded-bl-lg");
           }
         }
         if (columnIndex === 2) {
           cellButton.classList.add("border-r-0");
           if (rowIndex === 0) {
-            cellButton.classList.add('rounded-tr-lg')
+            cellButton.classList.add("rounded-tr-lg");
           }
         }
 
@@ -239,6 +239,14 @@ const getPLayers = (function () {
     form1.style.display = "none";
     const container = document.querySelector("#player1side");
     const welcome = document.createElement("h3");
+    welcome.classList.add(
+      "block",
+      "text-lg",
+      "font-medium",
+      "leading-6",
+      "text-rose-50",
+      "items-center"
+    );
     welcome.textContent = `Welcome to the game, ${playersArr[0].name}! Your symbol is ${playersArr[0].symbol}.`;
     container.appendChild(welcome);
   }
@@ -259,6 +267,14 @@ const getPLayers = (function () {
     form2.style.display = "none";
     const container = document.querySelector("#player2side");
     const welcome = document.createElement("h3");
+    welcome.classList.add(
+      "block",
+      "text-lg",
+      "font-medium",
+      "leading-6",
+      "text-rose-50",
+      "items-center"
+    );
     welcome.textContent = `Welcome to the game, ${playersArr[1].name}! Your symbol is ${playersArr[1].symbol}.`;
     container.appendChild(welcome);
   }

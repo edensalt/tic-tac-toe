@@ -17,7 +17,7 @@ export default {
         'bg-dark': '#242424',
       },
       gridTemplateColumns: {
-        'layout': '1fr 2fr 1fr',
+        'layout': '164px 1fr 164px',
       },
     },
   },

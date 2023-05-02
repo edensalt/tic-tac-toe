@@ -13,13 +13,11 @@
     </h1>
     <div
       id="players-board"
-      class="grid grid-cols-layout items-center justify-items-center"
+      class="grid grid-cols-layout gap-6 mx-36 h-64 items-center justify-items-center"
     >
       <div id="player1side">
         <form id="player-one-form" class="space-y-2 flex flex-col items-center">
-          <div
-            class="flex flex-col gap-x-6 gap-y-8 sm:grid-cols-6 border-b border-white/10 pb-6"
-          >
+          <div class="flex flex-col py-2">
             <div class="sm:col-span-4">
               <label
                 for="name"
@@ -35,29 +33,59 @@
                     id="player-one-name"
                     name="name"
                     autocomplete="given-name"
-                    class="flex-1 border-0 bg-transparent py-1.5 pl-2 text-white focus:ring-0 sm:text-sm sm:leading-6"
+                    class="flex-1 border-0 bg-transparent py-1.5 pl-2 text-rose-50 focus:ring-0 sm:text-sm sm:leading-6"
                     placeholder="Name"
                   />
                 </div>
               </div>
             </div>
           </div>
-          <fieldset>
-            <legend class="text-sm font-semibold leading-6 text-white">
-              Symbol
-            </legend>
-            <div class="my-2">
-              <div class="flex items-center gap-x-3">
-                <input type="radio" id="x" name="player-one-symbol" value="x" class="h-4 w-4 border-white/10 bg-white/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"/>
-                <label for="x" class="block text-sm font-medium leading-6 text-rose-50">x</label>
+          <div class="border-t border-b border-white/10 py-2">
+            <fieldset>
+              <legend class="text-sm font-semibold leading-6 text-white">
+                Symbol
+              </legend>
+              <div class="my-2">
+                <div class="flex items-center gap-x-3">
+                  <input
+                    type="radio"
+                    id="x"
+                    name="player-one-symbol"
+                    value="x"
+                    class="h-4 w-4 border-white/10 bg-white/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
+                  />
+                  <label
+                    for="x"
+                    class="block text-sm font-medium leading-6 text-rose-50"
+                    >x</label
+                  >
+                </div>
+                <div class="flex items-center gap-x-3">
+                  <input
+                    type="radio"
+                    id="o"
+                    name="player-one-symbol"
+                    value="o"
+                    class="h-4 w-4 border-white/10 bg-white/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
+                  />
+                  <label
+                    for="o"
+                    class="block text-sm font-medium leading-6 text-rose-50"
+                    >o</label
+                  >
+                </div>
               </div>
-              <div class="flex items-center gap-x-3">
-                <input type="radio" id="o" name="player-one-symbol" value="o" class="h-4 w-4 border-white/10 bg-white/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"/>
-                <label for="o" class="block text-sm font-medium leading-6 text-rose-50">o</label>
-              </div>
-            </div>
-          </fieldset>
-          <button type="submit" id="player-submit" class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Add player 1</button>
+            </fieldset>
+          </div>
+          <div class="py-2">
+            <button
+              type="submit"
+              id="player-submit"
+              class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            >
+              Add player 1
+            </button>
+          </div>
         </form>
       </div>
       <div
@@ -65,11 +93,44 @@
         class="grid box-border rounded-lg ml-5 mr-5 grid-rows-3 grid-cols-3 w-[200px] h-[200px] bg-blue-400 border-4 border-blue-400"
       ></div>
       <div id="player2side">
-        <h3 id="waiting-message">Waiting for player 1</h3>
-        <form id="player-two-form">
-          <label for="name">name</label>
-          <input type="text" id="player-two-name" name="name" />
-          <button type="submit" id="player-submit">Add player 2</button>
+        <h3
+          id="waiting-message"
+          class="block text-sm font-medium leading-6 text-white"
+        >
+          Waiting for player 1
+        </h3>
+        <form id="player-two-form" class="space-y-2 flex flex-col items-center">
+          <div class="flex flex-col py-2">
+            <div class="sm:col-span-4">
+              <label
+                for="name"
+                class="block text-sm font-medium leading-6 text-white"
+                >Player Two Name</label
+              >
+              <div class="mt-2">
+                <div
+                  class="flex rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
+                >
+                  <input
+                    type="text"
+                    id="player-two-name"
+                    name="name"
+                    class="flex-1 border-0 bg-transparent py-1.5 pl-2 text-rose-50 focus:ring-0 sm:text-sm sm:leading-6"
+                    placeholder="Name"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="py-2">
+            <button
+              type="submit"
+              id="player-submit"
+              class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            >
+              Add player 2
+            </button>
+          </div>
         </form>
       </div>
     </div>
