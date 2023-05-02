@@ -39,7 +39,7 @@ const gameController = (function () {
   let round = 1;
 
   const playRound = (cellRow, cellColumn) => {
-
+``
 
     if (round === 1 && playersArr[0].symbol === 'x' || playersArr[0].symbol === 'x' && round % 2 !== 0) {
       currentPlayerIndex = 0
@@ -79,6 +79,39 @@ const gameController = (function () {
         const title = document.querySelector("#title");
         const h1 = document.createElement("h1");
         h1.innerHTML = `Congratulations! <br />${getCurrentPlayerName()} won!`;
+        h1.classList.add("pt-6", "text-7xl");
+        const btn = document.createElement("button");
+        btn.textContent = "Play again?";
+        btn.classList.add(
+          "rounded-md",
+          "bg-indigo-500",
+          "px-3",
+          "py-2",
+          "text-sm",
+          "font-semibold",
+          "text-white",
+          "shadow-sm",
+          "hover:bg-indigo-400",
+          "focus-visible:outline",
+          "focus-visible:outline-2",
+          "focus-visible:outline-offset-2",
+          "focus-visible:outline-indigo-500"
+        );
+        btn.addEventListener("click", function () {
+          location.reload();
+        });
+        container.style.display = "none";
+        title.appendChild(h1);
+        title.appendChild(btn);
+      }
+
+      // Remove board and declare tie
+
+      function displayTie() {
+        const container = document.querySelector("#players-board");
+        const title = document.querySelector("#title");
+        const h1 = document.createElement("h1");
+        h1.innerHTML = `A well fought match, indeed. You tied!`;
         h1.classList.add("pt-6", "text-7xl");
         const btn = document.createElement("button");
         btn.textContent = "Play again?";
@@ -154,6 +187,13 @@ const gameController = (function () {
         displayWinner();
         return getCurrentPlayerName();
       }
+
+       // Tie conditions
+
+       if (round === 10) {
+        displayTie();
+        return getCurrentPlayerName();
+       }
 
       return false;
     };
