@@ -21,7 +21,7 @@ body {
   text-align: center;
 }
 
-.players-board {
+#players-board {
   display: flex;
   align-items: start;
 }

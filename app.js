@@ -64,7 +64,25 @@ const gameController = (function () {
     // Announce winner
 
     const decideWinner = () => {
+        
       const boardRows = board.length;
+
+      // Function to remove board and declare winner
+
+      function displayWinner() {
+        const container = document.querySelector("#players-board");
+        const title = document.querySelector("#title");
+        const h1 = document.createElement("h1");
+        h1.textContent = `Congratulations! ${getCurrentPlayerName()} has won!`;
+        const btn = document.createElement("button");
+        btn.textContent = "Play again?";
+        btn.addEventListener("click", function () {
+          location.reload();
+        });
+        container.style.display = "none";
+        title.appendChild(h1);
+        title.appendChild(btn);
+      }
 
       // Winner across a row
 
@@ -74,6 +92,7 @@ const gameController = (function () {
           board[i][1] === board[i][2] &&
           board[i][0] !== ""
         ) {
+          displayWinner();
           return getCurrentPlayerName();
         }
       }
@@ -86,6 +105,7 @@ const gameController = (function () {
           board[1][i] === board[2][i] &&
           board[0][i] !== ""
         ) {
+          displayWinner();
           return getCurrentPlayerName();
         }
       }
@@ -97,6 +117,7 @@ const gameController = (function () {
         board[1][1] === board[2][2] &&
         board[1][1] !== ""
       ) {
+        displayWinner();
         return getCurrentPlayerName();
       }
 
@@ -107,6 +128,7 @@ const gameController = (function () {
         board[1][1] === board[2][0] &&
         board[1][1] !== ""
       ) {
+        displayWinner();
         return getCurrentPlayerName();
       }
 
