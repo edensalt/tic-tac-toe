@@ -21,12 +21,12 @@
             <div class="sm:col-span-4">
               <label
                 for="name"
-                class="block text-sm font-medium leading-6 text-white"
+                class="block text-sm font-medium leading-6 text-rose-50"
                 >Player One Name</label
               >
               <div class="mt-2">
                 <div
-                  class="flex rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
+                  class="flex rounded-md bg-text-rose-50/5 ring-1 ring-inset ring-text-rose-50/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
                 >
                   <input
                     type="text"
@@ -40,19 +40,19 @@
               </div>
             </div>
           </div>
-          <div class="border-t border-b border-white/10 py-2">
+          <div class="border-t border-b border-text-white-50/10 w-full py-2">
             <fieldset>
-              <legend class="text-sm font-semibold leading-6 text-white">
+              <legend class="text-sm font-semibold leading-6 text-rose-50">
                 Symbol
               </legend>
-              <div class="my-2">
+              <div class="my-2 flex flex-col items-center">
                 <div class="flex items-center gap-x-3">
                   <input
                     type="radio"
                     id="x"
                     name="player-one-symbol"
                     value="x"
-                    class="h-4 w-4 border-white/10 bg-white/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
+                    class="h-4 w-4 border-text-rose-50/10 bg-text-rose-50/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
                   />
                   <label
                     for="x"
@@ -66,7 +66,7 @@
                     id="o"
                     name="player-one-symbol"
                     value="o"
-                    class="h-4 w-4 border-white/10 bg-white/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
+                    class="h-4 w-4 border-text-rose-50/10 bg-text-rose-50/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
                   />
                   <label
                     for="o"
@@ -81,9 +81,9 @@
             <button
               type="submit"
               id="player-submit"
-              class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+              class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-rose-50 shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
             >
-              Add player 1
+              Add Player 1
             </button>
           </div>
         </form>
@@ -95,21 +95,21 @@
       <div id="player2side">
         <h3
           id="waiting-message"
-          class="block text-sm font-medium leading-6 text-white"
+          class="block text-sm font-medium leading-6 text-rose-50"
         >
-          Waiting for player 1
+          Waiting for player one...
         </h3>
         <form id="player-two-form" class="space-y-2 flex flex-col items-center">
           <div class="flex flex-col py-2">
             <div class="sm:col-span-4">
               <label
                 for="name"
-                class="block text-sm font-medium leading-6 text-white"
+                class="block text-sm font-medium leading-6 text-rose-50"
                 >Player Two Name</label
               >
               <div class="mt-2">
                 <div
-                  class="flex rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
+                  class="flex rounded-md bg-rose-50/5 ring-1 ring-inset ring-text-rose-50/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
                 >
                   <input
                     type="text"
@@ -122,17 +122,34 @@
               </div>
             </div>
           </div>
+          <div id="player-two-symbol" class="border-t border-b border-text-white-50/10 py-2"></div>
           <div class="py-2">
             <button
               type="submit"
               id="player-submit"
-              class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+              class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-rose-50 shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
             >
-              Add player 2
+              Add Player 2
             </button>
           </div>
         </form>
       </div>
+    </div>
+
+    <div>
+      <a
+        href="https://github.com/edensalt/tic-tac-toe"
+        target="_blank"
+        class="flex justify-center mt-6 gap-3 items-center text-rose-50 hover:text-indigo-400"
+      >
+        <img
+          src="./public/github-mark-white.png"
+          alt="Git Hub Logo"
+          height="30px"
+          width="30px"
+        />
+        <p>@edensalt</p>
+      </a>
     </div>
   </body>
   <script src="app.js"></script>
