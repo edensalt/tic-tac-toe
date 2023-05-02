@@ -78,11 +78,7 @@
             </fieldset>
           </div>
           <div class="py-2">
-            <button
-              type="submit"
-              id="player-submit"
-              class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-rose-50 shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-            >
+            <button type="submit" id="player-submit" class="bg-indigo-500">
               Add Player 1
             </button>
           </div>
@@ -99,6 +95,11 @@
         >
           Waiting for player one...
         </h3>
+        <div id="player-two-selection" class="flex flex-col">
+          <h2 class="text-rose-50 my-2 text-sm">Who would you like to play?</h2>
+          <button id="human" class="my-2">A human friend</button>
+          <button id="computer" class="my-2">A computer friend</button>
+        </div>
         <form id="player-two-form" class="space-y-2 flex flex-col items-center">
           <div class="flex flex-col py-2">
             <div class="sm:col-span-4">
@@ -122,15 +123,12 @@
               </div>
             </div>
           </div>
-          <div id="player-two-symbol" class="border-t border-b border-text-white-50/10 py-2"></div>
+          <div
+            id="player-two-symbol"
+            class="border-t border-b border-text-white-50/10 py-2"
+          ></div>
           <div class="py-2">
-            <button
-              type="submit"
-              id="player-submit"
-              class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-rose-50 shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-            >
-              Add Player 2
-            </button>
+            <button type="submit" id="player-submit" class="bg-indigo-500">Add Player 2</button>
           </div>
         </form>
       </div>

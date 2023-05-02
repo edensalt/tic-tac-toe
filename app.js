@@ -115,21 +115,7 @@ const gameController = (function () {
         h1.classList.add("pt-6", "text-7xl");
         const btn = document.createElement("button");
         btn.textContent = "Play again?";
-        btn.classList.add(
-          "rounded-md",
-          "bg-indigo-500",
-          "px-3",
-          "py-2",
-          "text-sm",
-          "font-semibold",
-          "text-white",
-          "shadow-sm",
-          "hover:bg-indigo-400",
-          "focus-visible:outline",
-          "focus-visible:outline-2",
-          "focus-visible:outline-offset-2",
-          "focus-visible:outline-indigo-500"
-        );
+    
         btn.addEventListener("click", function () {
           location.reload();
         });
@@ -288,8 +274,10 @@ const displayController = (function () {
   const getPLayers = (function () {
     const form1 = document.querySelector("#player-one-form");
     const form2 = document.querySelector("#player-two-form");
+    const player2Selection = document.querySelector("#player-two-selection")
     const waitingMessage = document.querySelector("#waiting-message");
     form2.style.display = "none";
+    player2Selection.style.display = "none";
 
     // Add player 1
 
@@ -304,16 +292,7 @@ const displayController = (function () {
       Player(name, symbol);
       welcomePlayer1();
       waitingMessage.remove();
-      form2.style.display = "block";
-      const playerTwoSymbol = document.querySelector("#player-two-symbol");
-      para = document.createElement("p");
-      para.classList.add("text-sm", "font-medium", "leading-6", "text-rose-50");
-      if (playersArr[0].symbol === "o") {
-        para.innerHTML = `Your symbol is x.`;
-      } else {
-        para.innerHTML = `Your symbol is o.`;
-      }
-      playerTwoSymbol.appendChild(para);
+      player2Selection.style.display = "flex";
     });
 
     // Welcome player 1 and remove form
@@ -333,6 +312,26 @@ const displayController = (function () {
       welcome.innerHTML = `Welcome to the game, <span class="text-3xl text-rose-200">${playersArr[0].name}!</span> <br />Your symbol is <span class="font-symbols text-3xl text-rose-200">${playersArr[0].symbol}.`;
       container.appendChild(welcome);
     }
+
+    const playFriend = document.querySelector("#human");
+    const playComputer = document.querySelector("#computer");
+
+    // Populate player 2 form
+
+    playFriend.addEventListener("click", function (e) {
+      e.preventDefault;
+      player2Selection.style.display = "none";
+      form2.style.display = "block";
+      const playerTwoSymbol = document.querySelector("#player-two-symbol");
+      para = document.createElement("p");
+      para.classList.add("text-sm", "font-medium", "leading-6", "text-rose-50");
+      if (playersArr[0].symbol === "o") {
+        para.innerHTML = `Your symbol is x.`;
+      } else {
+        para.innerHTML = `Your symbol is o.`;
+      }
+      playerTwoSymbol.appendChild(para);
+    })
 
     // Add player 2
 
