@@ -51,10 +51,10 @@ const gameController = (function () {
       currentPlayerIndex = 0;
     } else currentPlayerIndex = 1;
 
-    function getCurrentPlayerName() {
-      const currentPlayer = playersArr[currentPlayerIndex];
-      return currentPlayer.name;
-    }
+    // function getCurrentPlayerName() {
+    //   const currentPlayer = playersArr[currentPlayerIndex];
+    //   return currentPlayer.name;
+    // }
 
     function getCurrentPlayerSymbol() {
       const currentPlayer = playersArr[currentPlayerIndex];
@@ -74,125 +74,7 @@ const gameController = (function () {
     //
     round++;
     console.log(round);
-
-    // Announce winner
-
-    const decideWinner = () => {
-      const boardRows = board.length;
-
-      // Remove board and declare winner
-
-      function displayWinner() {
-        const container = document.querySelector("#players-board");
-        const title = document.querySelector("#title");
-        const h1 = document.createElement("h1");
-        h1.innerHTML = `Congratulations! <br />${getCurrentPlayerName()} won!`;
-        h1.classList.add("pt-6", "text-7xl");
-        const btn = document.createElement("button");
-        btn.textContent = "Play again?";
-        btn.classList.add(
-          "rounded-md",
-          "bg-indigo-500",
-          "px-3",
-          "py-2",
-          "text-sm",
-          "font-semibold",
-          "text-white",
-          "shadow-sm",
-          "hover:bg-indigo-400",
-          "focus-visible:outline",
-          "focus-visible:outline-2",
-          "focus-visible:outline-offset-2",
-          "focus-visible:outline-indigo-500"
-        );
-        btn.addEventListener("click", function () {
-          location.reload();
-        });
-        container.style.display = "none";
-        title.appendChild(h1);
-        title.appendChild(btn);
-      }
-
-      // Remove board and declare tie
-
-      function displayTie() {
-        const container = document.querySelector("#players-board");
-        const title = document.querySelector("#title");
-        const h1 = document.createElement("h1");
-        h1.innerHTML = `A well fought match, indeed. You tied!`;
-        h1.classList.add("pt-6", "text-7xl");
-        const btn = document.createElement("button");
-        btn.textContent = "Play again?";
-
-        btn.addEventListener("click", function () {
-          location.reload();
-        });
-        container.style.display = "none";
-        title.appendChild(h1);
-        title.appendChild(btn);
-      }
-
-      // Win conditions
-
-      // Winner across a row
-
-      for (i = 0; i < boardRows; i++) {
-        if (
-          board[i][0] === board[i][1] &&
-          board[i][1] === board[i][2] &&
-          board[i][0] !== ""
-        ) {
-          displayWinner();
-          return getCurrentPlayerName();
-        }
-      }
-
-      // Winner across a column
-
-      for (i = 0; i < boardRows; i++) {
-        if (
-          board[0][i] === board[1][i] &&
-          board[1][i] === board[2][i] &&
-          board[0][i] !== ""
-        ) {
-          displayWinner();
-          return getCurrentPlayerName();
-        }
-      }
-
-      // Winner diagonal to bottom right
-
-      if (
-        board[0][0] === board[1][1] &&
-        board[1][1] === board[2][2] &&
-        board[1][1] !== ""
-      ) {
-        displayWinner();
-        return getCurrentPlayerName();
-      }
-
-      // Winner diagonal to bottom left
-
-      if (
-        board[2][0] === board[1][1] &&
-        board[1][1] === board[2][0] &&
-        board[1][1] !== ""
-      ) {
-        displayWinner();
-        return getCurrentPlayerName();
-      }
-
-      // Tie conditions
-
-      if (round === 10) {
-        displayTie();
-        return getCurrentPlayerName();
-      }
-
-      return false;
-    };
-    console.log(decideWinner());
-    console.log(getCurrentPlayerName());
+    
   };
 
   // COMPUTER PLAYS ROUND
@@ -207,10 +89,10 @@ const gameController = (function () {
       currentPlayerIndex = 0;
     } else currentPlayerIndex = 1;
 
-    function getCurrentPlayerName() {
-      const currentPlayer = playersArr[currentPlayerIndex];
-      return currentPlayer.name;
-    }
+    // function getCurrentPlayerName() {
+    //   const currentPlayer = playersArr[currentPlayerIndex];
+    //   return currentPlayer.name;
+    // }
 
     function getCurrentPlayerSymbol() {
       const currentPlayer = playersArr[currentPlayerIndex];
@@ -245,129 +127,133 @@ const gameController = (function () {
 
     //
     round++;
-    console.log(round);
-
-    // Announce winner
-
-    const decideWinner = () => {
-      const boardRows = board.length;
-
-      // Remove board and declare winner
-
-      function displayWinner() {
-        const container = document.querySelector("#players-board");
-        const title = document.querySelector("#title");
-        const h1 = document.createElement("h1");
-        h1.innerHTML = `Congratulations! <br />${getCurrentPlayerName()} won!`;
-        h1.classList.add("pt-6", "text-7xl");
-        const btn = document.createElement("button");
-        btn.textContent = "Play again?";
-        btn.classList.add(
-          "rounded-md",
-          "bg-indigo-500",
-          "px-3",
-          "py-2",
-          "text-sm",
-          "font-semibold",
-          "text-white",
-          "shadow-sm",
-          "hover:bg-indigo-400",
-          "focus-visible:outline",
-          "focus-visible:outline-2",
-          "focus-visible:outline-offset-2",
-          "focus-visible:outline-indigo-500"
-        );
-        btn.addEventListener("click", function () {
-          location.reload();
-        });
-        container.style.display = "none";
-        title.appendChild(h1);
-        title.appendChild(btn);
-      }
-
-      // Remove board and declare tie
-
-      function displayTie() {
-        const container = document.querySelector("#players-board");
-        const title = document.querySelector("#title");
-        const h1 = document.createElement("h1");
-        h1.innerHTML = `A well fought match, indeed. You tied!`;
-        h1.classList.add("pt-6", "text-7xl");
-        const btn = document.createElement("button");
-        btn.textContent = "Play again?";
-
-        btn.addEventListener("click", function () {
-          location.reload();
-        });
-        container.style.display = "none";
-        title.appendChild(h1);
-        title.appendChild(btn);
-      }
-
-      // Win conditions
-
-      // Winner across a row
-
-      for (i = 0; i < boardRows; i++) {
-        if (
-          board[i][0] === board[i][1] &&
-          board[i][1] === board[i][2] &&
-          board[i][0] !== ""
-        ) {
-          displayWinner();
-          return getCurrentPlayerName();
-        }
-      }
-
-      // Winner across a column
-
-      for (i = 0; i < boardRows; i++) {
-        if (
-          board[0][i] === board[1][i] &&
-          board[1][i] === board[2][i] &&
-          board[0][i] !== ""
-        ) {
-          displayWinner();
-          return getCurrentPlayerName();
-        }
-      }
-
-      // Winner diagonal to bottom right
-
-      if (
-        board[0][0] === board[1][1] &&
-        board[1][1] === board[2][2] &&
-        board[1][1] !== ""
-      ) {
-        displayWinner();
-        return getCurrentPlayerName();
-      }
-
-      // Winner diagonal to bottom left
-
-      if (
-        board[2][0] === board[1][1] &&
-        board[1][1] === board[2][0] &&
-        board[1][1] !== ""
-      ) {
-        displayWinner();
-        return getCurrentPlayerName();
-      }
-
-      // Tie conditions
-
-      if (round === 10) {
-        displayTie();
-        return getCurrentPlayerName();
-      }
-
-      return false;
-    };
-    console.log(decideWinner());
-    console.log(getCurrentPlayerName());
+    console.log(round); 
   };
 
-  return { playRound, playRoundAsComputer };
+  // SEE IF THERE IS A WINNER
+
+  const decideWinner = () => {
+    const boardRows = board.length;
+
+    function getCurrentPlayerName() {
+      const currentPlayer = playersArr[currentPlayerIndex];
+      return currentPlayer.name;
+    }
+
+    // Remove board and declare winner
+
+    function displayWinner() {
+      
+      const container = document.querySelector("#players-board");
+      const title = document.querySelector("#title");
+      const h1 = document.createElement("h1");
+      h1.innerHTML = `Congratulations! <br />${getCurrentPlayerName()} won!`;
+      h1.classList.add("pt-6", "text-7xl");
+      const btn = document.createElement("button");
+      btn.textContent = "Play again?";
+      btn.classList.add(
+        "rounded-md",
+        "bg-indigo-500",
+        "px-3",
+        "py-2",
+        "text-sm",
+        "font-semibold",
+        "text-white",
+        "shadow-sm",
+        "hover:bg-indigo-400",
+        "focus-visible:outline",
+        "focus-visible:outline-2",
+        "focus-visible:outline-offset-2",
+        "focus-visible:outline-indigo-500"
+      );
+      btn.addEventListener("click", function () {
+        location.reload();
+      });
+      container.style.display = "none";
+      title.appendChild(h1);
+      title.appendChild(btn);
+    }
+
+    // Remove board and declare tie
+
+    function displayTie() {
+      const container = document.querySelector("#players-board");
+      const title = document.querySelector("#title");
+      const h1 = document.createElement("h1");
+      h1.innerHTML = `A well fought match, indeed. You tied!`;
+      h1.classList.add("pt-6", "text-7xl");
+      const btn = document.createElement("button");
+      btn.textContent = "Play again?";
+
+      btn.addEventListener("click", function () {
+        location.reload();
+      });
+      container.style.display = "none";
+      title.appendChild(h1);
+      title.appendChild(btn);
+    }
+
+    // Win conditions
+
+    // Winner across a row
+
+    for (i = 0; i < boardRows; i++) {
+      if (
+        board[i][0] === board[i][1] &&
+        board[i][1] === board[i][2] &&
+        board[i][0] !== ""
+      ) {
+        displayWinner();
+        return getCurrentPlayerName();
+      }
+    }
+
+    // Winner across a column
+
+    for (i = 0; i < boardRows; i++) {
+      if (
+        board[0][i] === board[1][i] &&
+        board[1][i] === board[2][i] &&
+        board[0][i] !== ""
+      ) {
+        displayWinner();
+        return getCurrentPlayerName();
+      }
+    }
+
+    // Winner diagonal to bottom right
+
+    if (
+      board[0][0] === board[1][1] &&
+      board[1][1] === board[2][2] &&
+      board[1][1] !== ""
+    ) {
+      displayWinner();
+      return getCurrentPlayerName();
+    }
+
+    // Winner diagonal to bottom left
+
+    if (
+      board[2][0] === board[1][1] &&
+      board[1][1] === board[2][0] &&
+      board[1][1] !== ""
+    ) {
+      displayWinner();
+      return getCurrentPlayerName();
+    }
+
+    // Tie conditions
+
+    if (round === 10) {
+      displayTie();
+      return getCurrentPlayerName();
+    }
+
+    return false;
+  };
+
+  return { playRound, playRoundAsComputer, decideWinner };
 })();
 
 // DISPLAY CONTROLLER
@@ -447,6 +333,7 @@ const displayController = (function () {
     const cellColumn = parseInt(e.target.getAttribute("data-column"));
     gameController.playRound(cellRow, cellColumn);
     updateBoard();
+    if (gameController.decideWinner() === false) {
     if (playersArr[1].type === "computer") {
       const board = gameBoard.getBoard();
       compRow = Math.floor(Math.random() * 3);
@@ -458,7 +345,9 @@ const displayController = (function () {
       }
       gameController.playRound(compRow, compCol);
       updateBoard();
+      gameController.decideWinner();
     }
+  }
     console.table(gameBoard.getBoard());
   }
 
