@@ -39,6 +39,8 @@ const gameController = (function () {
   let currentPlayerIndex;
   let round = 1;
 
+  // HUMAN PLAYS A ROUND
+
   const playRound = (cellRow, cellColumn) => {
     if (
       (round === 1 && playersArr[0].symbol === "x") ||
@@ -64,12 +66,10 @@ const gameController = (function () {
       board[cellRow][cellColumn] === "o" ||
       typeof playersArr[1] === "undefined"
     )
-      return;
+      return false;
 
     // when the player is a human
-    if (playersArr[1].type === "human") {
-      board[cellRow][cellColumn] = getCurrentPlayerSymbol();
-    }
+    board[cellRow][cellColumn] = getCurrentPlayerSymbol();
 
     //
     round++;
@@ -192,9 +192,182 @@ const gameController = (function () {
       return false;
     };
     console.log(decideWinner());
+    console.log(getCurrentPlayerName());
   };
 
-  return { playRound };
+  // COMPUTER PLAYS ROUND
+
+  const playRoundAsComputer = () => {
+    if (
+      (round === 1 && playersArr[0].symbol === "x") ||
+      (playersArr[0].symbol === "x" && round % 2 !== 0)
+    ) {
+      currentPlayerIndex = 0;
+    } else if (playersArr[0].symbol === "o" && round % 2 === 0) {
+      currentPlayerIndex = 0;
+    } else currentPlayerIndex = 1;
+
+    function getCurrentPlayerName() {
+      const currentPlayer = playersArr[currentPlayerIndex];
+      return currentPlayer.name;
+    }
+
+    function getCurrentPlayerSymbol() {
+      const currentPlayer = playersArr[currentPlayerIndex];
+      return currentPlayer.symbol;
+    }
+
+    function pickSquare() {
+      function pickRow() {
+        return Math.floor(Math.random() * 3);
+      }
+    
+      function pickCol() {
+        return Math.floor(Math.random() * 3);
+      }
+    
+      let row = pickRow();
+      let col = pickCol();
+    
+      while (board[row][col] === "x" || board[row][col] === "o") {
+        row = pickRow();
+        col = pickCol();
+      }
+    
+      return [row, col];
+    }
+
+    console.log(board[pickSquare().row][pickSquare().col]);
+    // when the player is a human
+    board[pickSquare().row][pickSquare().col] = getCurrentPlayerSymbol();
+
+  
+
+    //
+    round++;
+    console.log(round);
+
+    // Announce winner
+
+    const decideWinner = () => {
+      const boardRows = board.length;
+
+      // Remove board and declare winner
+
+      function displayWinner() {
+        const container = document.querySelector("#players-board");
+        const title = document.querySelector("#title");
+        const h1 = document.createElement("h1");
+        h1.innerHTML = `Congratulations! <br />${getCurrentPlayerName()} won!`;
+        h1.classList.add("pt-6", "text-7xl");
+        const btn = document.createElement("button");
+        btn.textContent = "Play again?";
+        btn.classList.add(
+          "rounded-md",
+          "bg-indigo-500",
+          "px-3",
+          "py-2",
+          "text-sm",
+          "font-semibold",
+          "text-white",
+          "shadow-sm",
+          "hover:bg-indigo-400",
+          "focus-visible:outline",
+          "focus-visible:outline-2",
+          "focus-visible:outline-offset-2",
+          "focus-visible:outline-indigo-500"
+        );
+        btn.addEventListener("click", function () {
+          location.reload();
+        });
+        container.style.display = "none";
+        title.appendChild(h1);
+        title.appendChild(btn);
+      }
+
+      // Remove board and declare tie
+
+      function displayTie() {
+        const container = document.querySelector("#players-board");
+        const title = document.querySelector("#title");
+        const h1 = document.createElement("h1");
+        h1.innerHTML = `A well fought match, indeed. You tied!`;
+        h1.classList.add("pt-6", "text-7xl");
+        const btn = document.createElement("button");
+        btn.textContent = "Play again?";
+
+        btn.addEventListener("click", function () {
+          location.reload();
+        });
+        container.style.display = "none";
+        title.appendChild(h1);
+        title.appendChild(btn);
+      }
+
+      // Win conditions
+
+      // Winner across a row
+
+      for (i = 0; i < boardRows; i++) {
+        if (
+          board[i][0] === board[i][1] &&
+          board[i][1] === board[i][2] &&
+          board[i][0] !== ""
+        ) {
+          displayWinner();
+          return getCurrentPlayerName();
+        }
+      }
+
+      // Winner across a column
+
+      for (i = 0; i < boardRows; i++) {
+        if (
+          board[0][i] === board[1][i] &&
+          board[1][i] === board[2][i] &&
+          board[0][i] !== ""
+        ) {
+          displayWinner();
+          return getCurrentPlayerName();
+        }
+      }
+
+      // Winner diagonal to bottom right
+
+      if (
+        board[0][0] === board[1][1] &&
+        board[1][1] === board[2][2] &&
+        board[1][1] !== ""
+      ) {
+        displayWinner();
+        return getCurrentPlayerName();
+      }
+
+      // Winner diagonal to bottom left
+
+      if (
+        board[2][0] === board[1][1] &&
+        board[1][1] === board[2][0] &&
+        board[1][1] !== ""
+      ) {
+        displayWinner();
+        return getCurrentPlayerName();
+      }
+
+      // Tie conditions
+
+      if (round === 10) {
+        displayTie();
+        return getCurrentPlayerName();
+      }
+
+      return false;
+    };
+    console.log(decideWinner());
+    console.log(getCurrentPlayerName());
+  };
+
+  return { playRound, playRoundAsComputer };
 })();
 
 // DISPLAY CONTROLLER
@@ -274,6 +447,19 @@ const displayController = (function () {
     const cellColumn = parseInt(e.target.getAttribute("data-column"));
     gameController.playRound(cellRow, cellColumn);
     updateBoard();
+    if (playersArr[1].type === "computer") {
+      const board = gameBoard.getBoard();
+      compRow = Math.floor(Math.random() * 3);
+      compCol =  Math.floor(Math.random() * 3);
+      while (board[compRow][compCol] === "x" ||
+      board[compRow][compCol] === "o") {
+        compRow = Math.floor(Math.random() * 3);
+      compCol =  Math.floor(Math.random() * 3)
+      }
+      gameController.playRound(compRow, compCol);
+      updateBoard();
+    }
+    console.table(gameBoard.getBoard());
   }
 
   updateBoard();
@@ -353,7 +539,7 @@ const displayController = (function () {
       if (playersArr[0].symbol == "x") {
         symbol = "o";
       } else symbol = "x";
-      const type = "human";
+      const type = "computer"; // ⚠️ CHANGE TO HUMAN!!!!!!!
       Player(name, symbol, type);
       welcomePlayer2();
     });
@@ -378,3 +564,4 @@ const displayController = (function () {
     }
   })();
 })();
+``
