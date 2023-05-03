@@ -74,7 +74,6 @@ const gameController = (function () {
     //
     round++;
     console.log(round);
-    
   };
 
   // COMPUTER PLAYS ROUND
@@ -103,19 +102,19 @@ const gameController = (function () {
       function pickRow() {
         return Math.floor(Math.random() * 3);
       }
-    
+
       function pickCol() {
         return Math.floor(Math.random() * 3);
       }
-    
+
       let row = pickRow();
       let col = pickCol();
-    
+
       while (board[row][col] === "x" || board[row][col] === "o") {
         row = pickRow();
         col = pickCol();
       }
-    
+
       return [row, col];
     }
 
@@ -123,11 +122,9 @@ const gameController = (function () {
     // when the player is a human
     board[pickSquare().row][pickSquare().col] = getCurrentPlayerSymbol();
 
-  
-
     //
     round++;
-    console.log(round); 
+    console.log(round);
   };
 
   // SEE IF THERE IS A WINNER
@@ -143,7 +140,6 @@ const gameController = (function () {
     // Remove board and declare winner
 
     function displayWinner() {
-      
       const container = document.querySelector("#players-board");
       const title = document.querySelector("#title");
       const h1 = document.createElement("h1");
@@ -325,6 +321,24 @@ const displayController = (function () {
     });
   }
 
+  // Computer turn
+
+  function computerTurn() {
+    const board = gameBoard.getBoard();
+    compRow = Math.floor(Math.random() * 3);
+    compCol = Math.floor(Math.random() * 3);
+    while (board[compRow][compCol] === "x" || board[compRow][compCol] === "o") {
+      compRow = Math.floor(Math.random() * 3);
+      compCol = Math.floor(Math.random() * 3);
+    }
+    gameController.playRound(compRow, compCol);
+    setTimeout(() => {
+    updateBoard();
+    }, 250);
+    setTimeout(() => {gameController.decideWinner();
+    }, 750);
+  }
+
   // Add event listener for selecting square
 
   function handleClick(e) {
@@ -334,20 +348,10 @@ const displayController = (function () {
     gameController.playRound(cellRow, cellColumn);
     updateBoard();
     if (gameController.decideWinner() === false) {
-    if (playersArr[1].type === "computer") {
-      const board = gameBoard.getBoard();
-      compRow = Math.floor(Math.random() * 3);
-      compCol =  Math.floor(Math.random() * 3);
-      while (board[compRow][compCol] === "x" ||
-      board[compRow][compCol] === "o") {
-        compRow = Math.floor(Math.random() * 3);
-      compCol =  Math.floor(Math.random() * 3)
+      if (playersArr[1].type === "computer") {
+        computerTurn();
       }
-      gameController.playRound(compRow, compCol);
-      updateBoard();
-      gameController.decideWinner();
     }
-  }
     console.table(gameBoard.getBoard());
   }
 
@@ -420,7 +424,7 @@ const displayController = (function () {
 
     playComputer.addEventListener("click", function (e) {
       player2Selection.style.display = "none";
-      const name = 'Computer';
+      const name = "Computer";
       let symbol;
       if (playersArr[0].symbol == "x") {
         symbol = "o";
@@ -428,20 +432,10 @@ const displayController = (function () {
       const type = "computer";
       Player(name, symbol, type);
       welcomePlayer2();
-      if (symbol = 'x') {
-        const board = gameBoard.getBoard();
-        compRow = Math.floor(Math.random() * 3);
-        compCol =  Math.floor(Math.random() * 3);
-        while (board[compRow][compCol] === "x" ||
-        board[compRow][compCol] === "o") {
-          compRow = Math.floor(Math.random() * 3);
-        compCol =  Math.floor(Math.random() * 3)
-        }
-        gameController.playRound(compRow, compCol);
-        updateBoard();
-        gameController.decideWinner();
-      }
-    })
+      if (playersArr[0].symbol == "o") {
+        computerTurn();
+      } else return;
+    });
 
     // Add player 2
 
@@ -478,4 +472,4 @@ const displayController = (function () {
     }
   })();
 })();
-``
+``;
