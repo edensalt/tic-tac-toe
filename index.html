@@ -6,9 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="./output.css" />
+    <script>
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  document.documentElement.classList.add('dark')
+} else {
+  document.documentElement.classList.remove('dark')
+}
+
+// Whenever the user explicitly chooses light mode
+localStorage.theme = 'light'
+
+// Whenever the user explicitly chooses dark mode
+localStorage.theme = 'dark'
+
+// Whenever the user explicitly chooses to respect the OS preference
+localStorage.removeItem('theme')
+    </script>
   </head>
-  <body class="bg-slate-800 flex flex-col items-center text-center font-sans">
-    <h1 id="title" class="font-extrabold sm:text-5xl text-3xl sm:my-10 my-4 text-rose-50">
+  <body class="dark:bg-slate-800 bg-rose-50 flex flex-col items-center text-center font-sans">
+    <h1 id="title" class="font-extrabold sm:text-5xl text-3xl sm:my-10 my-4 dark:text-rose-50 text-slate-700">
       Tic Tac Toe
     </h1>
     <div
@@ -21,19 +37,19 @@
             <div class="sm:col-span-4">
               <label
                 for="name"
-                class="block text-sm font-medium leading-6 text-rose-50"
+                class="block text-sm font-medium leading-6 dark:text-rose-50 text-slate-700"
                 >Player One Name</label
               >
               <div class="mt-2">
                 <div
-                  class="flex rounded-md bg-text-rose-50/5 ring-1 ring-inset ring-text-rose-50/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
+                  class="flex rounded-md ring-1 ring-inset ring-text-rose-50/10 dark:ring-indigo-500/50 ring-indigo-500 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
                 >
                   <input
                     type="text"
                     id="player-one-name"
                     name="name"
                     autocomplete="given-name"
-                    class="flex-1 border-0 bg-transparent py-1.5 pl-2 text-rose-50 focus:ring-0 sm:text-sm sm:leading-6"
+                    class="flex-1 border-0 dark:bg-transparent bg-white/30 py-1.5 pl-2 dark:text-rose-50 text-slate-700 focus:ring-0 sm:text-sm sm:leading-6"
                     placeholder="Name"
                   />
                 </div>
@@ -42,7 +58,7 @@
           </div>
           <div class="border-t border-b border-text-white-50/10 w-full py-2">
             <fieldset>
-              <legend class="text-sm font-semibold leading-6 text-rose-50">
+              <legend class="text-sm font-semibold leading-6 dark:text-rose-50 text-slate-700">
                 Symbol
               </legend>
               <div class="my-2 flex flex-col items-center">
@@ -56,7 +72,7 @@
                   />
                   <label
                     for="x"
-                    class="block text-sm font-medium leading-6 text-rose-50"
+                    class="block text-sm font-medium leading-6 dark:text-rose-50 text-slate-800"
                     >x</label
                   >
                 </div>
@@ -70,12 +86,12 @@
                   />
                   <label
                     for="o"
-                    class="block text-sm font-medium leading-6 text-rose-50"
+                    class="block text-sm font-medium leading-6 dark:text-rose-50 text-slate-700"
                     >o</label
                   >
                 </div>
               </div>
-              <p class="text-xs text-rose-50 italic">X goes first</p>
+              <p class="text-xs dark:text-rose-50 text-slate-700 italic">X goes first</p>
             </fieldset>
           </div>
           <div class="py-2">
@@ -92,7 +108,7 @@
       <div id="player2side">
         <h3
           id="waiting-message"
-          class="block text-sm font-medium leading-6 text-rose-50"
+          class="block text-sm font-medium leading-6 dark:text-rose-50 text-slate-700 italic"
         >
           Waiting for player one...
         </h3>
@@ -111,13 +127,13 @@
               >
               <div class="mt-2">
                 <div
-                  class="flex rounded-md bg-rose-50/5 ring-1 ring-inset ring-text-rose-50/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
+                class="flex rounded-md ring-1 ring-inset ring-text-rose-50/10 dark:ring-indigo-500/50 ring-indigo-500 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
                 >
                   <input
                     type="text"
                     id="player-two-name"
                     name="name"
-                    class="flex-1 border-0 bg-transparent py-1.5 pl-2 text-rose-50 focus:ring-0 sm:text-sm sm:leading-6"
+                    class="flex-1 border-0 dark:bg-transparent bg-white/30 py-1.5 pl-2 dark:text-rose-50 text-slate-700 focus:ring-0 sm:text-sm sm:leading-6"
                     placeholder="Name"
                   />
                 </div>
@@ -141,13 +157,14 @@
       <a
         href="https://github.com/edensalt/tic-tac-toe"
         target="_blank"
-        class="flex justify-center mt-6 gap-3 items-center text-rose-50 hover:text-indigo-400"
+        class="flex justify-center mt-6 gap-3 items-center text-indigo-500 hover:text-indigo-400"
       >
         <img
           src="./public/github-mark-white.png"
           alt="Git Hub Logo"
           height="30px"
           width="30px"
+          class="bg-indigo-500 p-1 rounded-full dark:bg-transparent"
         />
         <p>@edensalt</p>
       </a>

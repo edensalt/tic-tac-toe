@@ -27,9 +27,10 @@ export default {
         "bg-dark": "#242424",
       },
       gridTemplateColumns: {
-        layout: "164px 1fr 164px",
+        layout: "192px 1fr 192px",
       },
     },
   },
   plugins: [],
+  darkMode: "class",
 };

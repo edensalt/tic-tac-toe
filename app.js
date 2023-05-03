@@ -395,10 +395,11 @@ const displayController = (function () {
         "text-lg",
         "font-medium",
         "leading-6",
-        "text-rose-50",
+        "dark:text-rose-50",
+        "text-slate-800",
         "items-center"
       );
-      welcome.innerHTML = `Welcome to the game, <span class="text-3xl text-rose-200">${playersArr[0].name}!</span> <br />Your symbol is <span class="font-symbols text-3xl text-rose-200">${playersArr[0].symbol}.`;
+      welcome.innerHTML = `Welcome to the game, <span class="text-3xl dark:text-rose-200 text-indigo-500">${playersArr[0].name}!</span> <br />Your symbol is <span class="font-symbols text-3xl dark:text-rose-200 text-indigo-500">${playersArr[0].symbol}.`;
       container.appendChild(welcome);
     }
 
@@ -413,7 +414,7 @@ const displayController = (function () {
       form2.style.display = "block";
       const playerTwoSymbol = document.querySelector("#player-two-symbol");
       para = document.createElement("p");
-      para.classList.add("text-sm", "font-medium", "leading-6", "text-rose-50");
+      para.classList.add("text-sm", "font-medium", "leading-6", "dark:text-rose-50", "text-slate-700");
       if (playersArr[0].symbol === "o") {
         para.innerHTML = `Your symbol is x.`;
       } else {
@@ -447,7 +448,7 @@ const displayController = (function () {
       if (playersArr[0].symbol == "x") {
         symbol = "o";
       } else symbol = "x";
-      const type = "human"; // ⚠️ CHANGE TO HUMAN!!!!!!!
+      const type = "human";
       Player(name, symbol, type);
       welcomePlayer2();
     });
@@ -463,10 +464,11 @@ const displayController = (function () {
         "text-lg",
         "font-medium",
         "leading-6",
-        "text-rose-50",
+        "dark:text-rose-50",
+        "text-slate-800",
         "items-center"
       );
-      welcome.innerHTML = `Welcome to the game, <span class="text-3xl text-rose-200">${playersArr[1].name}!</span> <br />Your symbol is <span class="font-symbols text-3xl text-rose-200">${playersArr[1].symbol}.`;
+      welcome.innerHTML = `Welcome to the game, <span class="text-3xl dark:text-rose-200 text-indigo-500">${playersArr[1].name}!</span> <br />Your symbol is <span class="font-symbols text-3xl dark:text-rose-200 text-indigo-500">${playersArr[1].symbol}.`;
       container.appendChild(welcome);
       updateBoard();
     }

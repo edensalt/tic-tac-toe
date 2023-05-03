@@ -4,7 +4,7 @@ Tic Tac Toe game for the <a href="https://www.theodinproject.com/lessons/node-pa
 ## Skills demonstrated
 
 - JS factory functions, modules, and private functions
-- Styling with Tailwind
+- Styling with Tailwind; adjusted for phone screens
 - Set-up with Vite
 - Forms and DOM manipulation
 - JS if statements and for loops
@@ -16,4 +16,3 @@ Tic Tac Toe game for the <a href="https://www.theodinproject.com/lessons/node-pa
 
 - Make light/dark mode
 - Make the computer unbeatable (or close to it)
-- Make phone friendly
