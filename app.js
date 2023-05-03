@@ -333,9 +333,10 @@ const displayController = (function () {
     }
     gameController.playRound(compRow, compCol);
     setTimeout(() => {
-    updateBoard();
+      updateBoard();
     }, 250);
-    setTimeout(() => {gameController.decideWinner();
+    setTimeout(() => {
+      gameController.decideWinner();
     }, 750);
   }
 
@@ -414,7 +415,13 @@ const displayController = (function () {
       form2.style.display = "block";
       const playerTwoSymbol = document.querySelector("#player-two-symbol");
       para = document.createElement("p");
-      para.classList.add("text-sm", "font-medium", "leading-6", "dark:text-rose-50", "text-slate-700");
+      para.classList.add(
+        "text-sm",
+        "font-medium",
+        "leading-6",
+        "dark:text-rose-50",
+        "text-slate-700"
+      );
       if (playersArr[0].symbol === "o") {
         para.innerHTML = `Your symbol is x.`;
       } else {

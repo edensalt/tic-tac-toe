@@ -5,170 +5,238 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic Tac Toe</title>
-    <link rel="stylesheet" href="./output.css" />
-    <script>
-      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-  document.documentElement.classList.add('dark')
-} else {
-  document.documentElement.classList.remove('dark')
-}
-
-// Whenever the user explicitly chooses light mode
-localStorage.theme = 'light'
-
-// Whenever the user explicitly chooses dark mode
-localStorage.theme = 'dark'
-
-// Whenever the user explicitly chooses to respect the OS preference
-localStorage.removeItem('theme')
-    </script>
+    <link rel="stylesheet" href="./style.css" />
   </head>
-  <body class="dark:bg-slate-800 bg-rose-50 flex flex-col items-center text-center font-sans">
-    <h1 id="title" class="font-extrabold sm:text-5xl text-3xl sm:my-10 my-4 dark:text-rose-50 text-slate-700">
-      Tic Tac Toe
-    </h1>
-    <div
-      id="players-board"
-      class="sm:grid sm:grid-cols-layout gap-6 mx-36 sm:h-64 flex flex-col items-center justify-items-center"
-    >
-      <div id="player1side">
-        <form id="player-one-form" class="space-y-2 flex flex-col items-center">
-          <div class="flex flex-col py-2">
-            <div class="sm:col-span-4">
-              <label
-                for="name"
-                class="block text-sm font-medium leading-6 dark:text-rose-50 text-slate-700"
-                >Player One Name</label
-              >
-              <div class="mt-2">
-                <div
-                  class="flex rounded-md ring-1 ring-inset ring-text-rose-50/10 dark:ring-indigo-500/50 ring-indigo-500 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
-                >
-                  <input
-                    type="text"
-                    id="player-one-name"
-                    name="name"
-                    autocomplete="given-name"
-                    class="flex-1 border-0 dark:bg-transparent bg-white/30 py-1.5 pl-2 dark:text-rose-50 text-slate-700 focus:ring-0 sm:text-sm sm:leading-6"
-                    placeholder="Name"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="border-t border-b border-text-white-50/10 w-full py-2">
-            <fieldset>
-              <legend class="text-sm font-semibold leading-6 dark:text-rose-50 text-slate-700">
-                Symbol
-              </legend>
-              <div class="my-2 flex flex-col items-center">
-                <div class="flex items-center gap-x-3">
-                  <input
-                    type="radio"
-                    id="x"
-                    name="player-one-symbol"
-                    value="x"
-                    class="h-4 w-4 border-text-rose-50/10 bg-text-rose-50/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
-                  />
-                  <label
-                    for="x"
-                    class="block text-sm font-medium leading-6 dark:text-rose-50 text-slate-800"
-                    >x</label
-                  >
-                </div>
-                <div class="flex items-center gap-x-3">
-                  <input
-                    type="radio"
-                    id="o"
-                    name="player-one-symbol"
-                    value="o"
-                    class="h-4 w-4 border-text-rose-50/10 bg-text-rose-50/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
-                  />
-                  <label
-                    for="o"
-                    class="block text-sm font-medium leading-6 dark:text-rose-50 text-slate-700"
-                    >o</label
-                  >
-                </div>
-              </div>
-              <p class="text-xs dark:text-rose-50 text-slate-700 italic">X goes first</p>
-            </fieldset>
-          </div>
-          <div class="py-2">
-            <button type="submit" id="player-submit" class="bg-indigo-500">
-              Add Player 1
-            </button>
-          </div>
-        </form>
-      </div>
-      <div
-        id="board"
-        class="grid box-border rounded-lg ml-5 mr-5 grid-rows-3 grid-cols-3 w-[200px] h-[200px] bg-indigo-400 border-8 border-indigo-400"
-      ></div>
-      <div id="player2side">
-        <h3
-          id="waiting-message"
-          class="block text-sm font-medium leading-6 dark:text-rose-50 text-slate-700 italic"
-        >
-          Waiting for player one...
-        </h3>
-        <div id="player-two-selection" class="flex flex-col">
-          <h2 class="text-rose-50 my-2 text-sm">Who would you like to play?</h2>
-          <button id="human" class="my-2">A human friend</button>
-          <button id="computer" class="my-2">A computer friend</button>
-        </div>
-        <form id="player-two-form" class="space-y-2 flex flex-col items-center">
-          <div class="flex flex-col py-2">
-            <div class="sm:col-span-4">
-              <label
-                for="name"
-                class="block text-sm font-medium leading-6 text-rose-50"
-                >Player Two Name</label
-              >
-              <div class="mt-2">
-                <div
-                class="flex rounded-md ring-1 ring-inset ring-text-rose-50/10 dark:ring-indigo-500/50 ring-indigo-500 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
-                >
-                  <input
-                    type="text"
-                    id="player-two-name"
-                    name="name"
-                    class="flex-1 border-0 dark:bg-transparent bg-white/30 py-1.5 pl-2 dark:text-rose-50 text-slate-700 focus:ring-0 sm:text-sm sm:leading-6"
-                    placeholder="Name"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            id="player-two-symbol"
-            class="border-t border-b border-text-white-50/10 py-2"
-          ></div>
-          <div class="py-2">
-            <button type="submit" id="player-submit" class="bg-indigo-500">
-              Add Player 2
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <div>
-      <a
-        href="https://github.com/edensalt/tic-tac-toe"
-        target="_blank"
-        class="flex justify-center mt-6 gap-3 items-center text-indigo-500 hover:text-indigo-400"
+  <body class="dark:bg-slate-800 bg-rose-50">
+    <div class="fixed top-4 right-4">
+      <button
+        id="theme-toggle"
+        type="button"
+        class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none ring-2 ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 shadow-md"
       >
-        <img
-          src="./public/github-mark-white.png"
-          alt="Git Hub Logo"
-          height="30px"
-          width="30px"
-          class="bg-indigo-500 p-1 rounded-full dark:bg-transparent"
-        />
-        <p>@edensalt</p>
-      </a>
+        <svg
+          id="theme-toggle-dark-icon"
+          class="w-5 h-5 hidden"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+          ></path>
+        </svg>
+        <svg
+          id="theme-toggle-light-icon"
+          class="w-5 h-5 hidden"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </button>
     </div>
+    <div class="flex flex-col items-center text-center font-sans">
+      <h1
+        id="title"
+        class="font-extrabold sm:text-5xl text-3xl sm:my-10 my-4 dark:text-rose-50 text-slate-700"
+      >
+        Tic Tac Toe
+      </h1>
+      <div
+        id="players-board"
+        class="sm:grid sm:grid-cols-layout gap-6 mx-36 sm:h-64 flex flex-col items-center justify-items-center"
+      >
+        <div id="player1side">
+          <form
+            id="player-one-form"
+            class="space-y-2 flex flex-col items-center"
+          >
+            <div class="flex flex-col py-2">
+              <div class="sm:col-span-4">
+                <label
+                  for="name"
+                  class="block text-sm font-medium leading-6 dark:text-rose-50 text-slate-700"
+                  >Player One Name</label
+                >
+                <div class="mt-2">
+                  <div
+                    class="flex rounded-md ring-1 ring-inset ring-text-rose-50/10 dark:ring-indigo-500/50 ring-indigo-500 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
+                  >
+                    <input
+                      type="text"
+                      id="player-one-name"
+                      name="name"
+                      autocomplete="given-name"
+                      class="flex-1 border-0 dark:bg-transparent bg-white/30 py-1.5 pl-2 dark:text-rose-50 text-slate-700 focus:ring-0 sm:text-sm sm:leading-6"
+                      placeholder="Name"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="border-t border-b border-text-white-50/10 w-full py-2">
+              <fieldset>
+                <legend
+                  class="text-sm font-semibold leading-6 dark:text-rose-50 text-slate-700"
+                >
+                  Symbol
+                </legend>
+                <div class="my-2 flex flex-col items-center">
+                  <div class="flex items-center gap-x-3">
+                    <input
+                      type="radio"
+                      id="x"
+                      name="player-one-symbol"
+                      value="x"
+                      class="h-4 w-4 border-text-rose-50/10 bg-text-rose-50/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
+                    />
+                    <label
+                      for="x"
+                      class="block text-sm font-medium leading-6 dark:text-rose-50 text-slate-800"
+                      >x</label
+                    >
+                  </div>
+                  <div class="flex items-center gap-x-3">
+                    <input
+                      type="radio"
+                      id="o"
+                      name="player-one-symbol"
+                      value="o"
+                      class="h-4 w-4 border-text-rose-50/10 bg-text-rose-50/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
+                    />
+                    <label
+                      for="o"
+                      class="block text-sm font-medium leading-6 dark:text-rose-50 text-slate-700"
+                      >o</label
+                    >
+                  </div>
+                </div>
+                <p class="text-xs dark:text-rose-50 text-slate-700 italic">
+                  X goes first
+                </p>
+              </fieldset>
+            </div>
+            <div class="py-2">
+              <button type="submit" id="player-submit" class="bg-indigo-500">
+                Add Player 1
+              </button>
+            </div>
+          </form>
+        </div>
+        <div
+          id="board"
+          class="grid box-border rounded-lg ml-5 mr-5 grid-rows-3 grid-cols-3 w-[200px] h-[200px] bg-indigo-400 border-8 border-indigo-400"
+        ></div>
+        <div id="player2side">
+          <h3
+            id="waiting-message"
+            class="block text-sm font-medium leading-6 dark:text-rose-50 text-slate-700 italic"
+          >
+            Waiting for player one...
+          </h3>
+          <div id="player-two-selection" class="flex flex-col">
+            <h2 class="text-rose-50 my-2 text-sm">
+              Who would you like to play?
+            </h2>
+            <button id="human" class="my-2">A human friend</button>
+            <button id="computer" class="my-2">A computer friend</button>
+          </div>
+          <form
+            id="player-two-form"
+            class="space-y-2 flex flex-col items-center"
+          >
+            <div class="flex flex-col py-2">
+              <div class="sm:col-span-4">
+                <label
+                  for="name"
+                  class="block text-sm font-medium leading-6 text-rose-50"
+                  >Player Two Name</label
+                >
+                <div class="mt-2">
+                  <div
+                    class="flex rounded-md ring-1 ring-inset ring-text-rose-50/10 dark:ring-indigo-500/50 ring-indigo-500 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
+                  >
+                    <input
+                      type="text"
+                      id="player-two-name"
+                      name="name"
+                      class="flex-1 border-0 dark:bg-transparent bg-white/30 py-1.5 pl-2 dark:text-rose-50 text-slate-700 focus:ring-0 sm:text-sm sm:leading-6"
+                      placeholder="Name"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              id="player-two-symbol"
+              class="border-t border-b border-text-white-50/10 py-2"
+            ></div>
+            <div class="py-2">
+              <button type="submit" id="player-submit" class="bg-indigo-500">
+                Add Player 2
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div>
+        <a
+          href="https://github.com/edensalt/tic-tac-toe"
+          target="_blank"
+          class="flex justify-center mt-6 gap-3 items-center text-indigo-500 hover:text-indigo-400"
+        >
+          <img
+            src="./public/github-mark-white.png"
+            alt="Git Hub Logo"
+            height="30px"
+            width="30px"
+            class="bg-indigo-500 p-1 rounded-full dark:bg-transparent"
+          />
+          <p>@edensalt</p>
+        </a>
+      </div>
+    </div>
+    <script src="./node_modules/flowbite/dist/flowbite.js"></script>
   </body>
   <script src="./app.js"></script>
+  <script>
+    
+    var themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
+    var themeToggleLightIcon = document.getElementById(
+      "theme-toggle-light-icon"
+    );
+
+    // Start on dark theme
+    document.documentElement.classList.add("dark");
+    themeToggleDarkIcon.classList.toggle("hidden");
+
+    // Whenever the user explicitly chooses light mode
+    localStorage.theme = "light";
+
+    // Whenever the user explicitly chooses dark mode
+    localStorage.theme = "dark";
+
+    var themeToggleBtn = document.getElementById("theme-toggle");
+
+    themeToggleBtn.addEventListener("click", function () {
+      // toggle icons inside button
+      themeToggleDarkIcon.classList.toggle("hidden");
+      themeToggleLightIcon.classList.toggle("hidden");
+
+      // update the local storage value based on the current theme
+      if (document.documentElement.classList.contains("dark")) {
+        localStorage.setItem("color-theme", "dark");
+      } else {
+        localStorage.setItem("color-theme", "light");
+      }
+
+      // toggle the "dark" class on the root element
+      document.documentElement.classList.toggle("dark");
+    });
+  </script>
 </html>

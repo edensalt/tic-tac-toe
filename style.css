@@ -11,8 +11,8 @@
 }
 
 @font-face {
-  font-family: 'varela-round';
-  src: url('./fonts/VarelaRound-Regular.ttf');
+  font-family: "varela-round";
+  src: url("./fonts/VarelaRound-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
