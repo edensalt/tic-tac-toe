@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
 @font-face {
   font-family: 'varela-round';
   src: url('./fonts/VarelaRound-Regular.ttf');
@@ -13,4 +21,12 @@
   button {
     @apply rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-rose-50 shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 cursor-pointer;
   }
+  /* ... */
 }
+
+/* #board > button {
+  border: solid 1px;
+  padding: auto;
+  height: 100%;
+  width: 100%;
+} */
