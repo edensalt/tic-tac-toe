@@ -333,9 +333,10 @@ const displayController = (function () {
     }
     gameController.playRound(compRow, compCol);
     setTimeout(() => {
-    updateBoard();
+      updateBoard();
     }, 250);
-    setTimeout(() => {gameController.decideWinner();
+    setTimeout(() => {
+      gameController.decideWinner();
     }, 750);
   }
 
@@ -472,4 +473,3 @@ const displayController = (function () {
     }
   })();
 })();
-``;
