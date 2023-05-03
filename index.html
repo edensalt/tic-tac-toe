@@ -201,42 +201,41 @@
         </a>
       </div>
     </div>
-    <script src="./flowbite/dist/flowbite.min.js"></script>
+    <script>
+    
+      var themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
+      var themeToggleLightIcon = document.getElementById(
+        "theme-toggle-light-icon"
+      );
+  
+      // Start on dark theme
+      document.documentElement.classList.add("dark");
+      themeToggleDarkIcon.classList.toggle("hidden");
+  
+      // Whenever the user explicitly chooses light mode
+      localStorage.theme = "light";
+  
+      // Whenever the user explicitly chooses dark mode
+      localStorage.theme = "dark";
+  
+      var themeToggleBtn = document.getElementById("theme-toggle");
+  
+      themeToggleBtn.addEventListener("click", function () {
+        // toggle icons inside button
+        themeToggleDarkIcon.classList.toggle("hidden");
+        themeToggleLightIcon.classList.toggle("hidden");
+  
+        // update the local storage value based on the current theme
+        if (document.documentElement.classList.contains("dark")) {
+          localStorage.setItem("color-theme", "dark");
+        } else {
+          localStorage.setItem("color-theme", "light");
+        }
+  
+        // toggle the "dark" class on the root element
+        document.documentElement.classList.toggle("dark");
+      });
+    </script>
   </body>
   <script src="./app.js"></script>
-  <script>
-    
-    var themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
-    var themeToggleLightIcon = document.getElementById(
-      "theme-toggle-light-icon"
-    );
-
-    // Start on dark theme
-    document.documentElement.classList.add("dark");
-    themeToggleDarkIcon.classList.toggle("hidden");
-
-    // Whenever the user explicitly chooses light mode
-    localStorage.theme = "light";
-
-    // Whenever the user explicitly chooses dark mode
-    localStorage.theme = "dark";
-
-    var themeToggleBtn = document.getElementById("theme-toggle");
-
-    themeToggleBtn.addEventListener("click", function () {
-      // toggle icons inside button
-      themeToggleDarkIcon.classList.toggle("hidden");
-      themeToggleLightIcon.classList.toggle("hidden");
-
-      // update the local storage value based on the current theme
-      if (document.documentElement.classList.contains("dark")) {
-        localStorage.setItem("color-theme", "dark");
-      } else {
-        localStorage.setItem("color-theme", "light");
-      }
-
-      // toggle the "dark" class on the root element
-      document.documentElement.classList.toggle("dark");
-    });
-  </script>
 </html>
