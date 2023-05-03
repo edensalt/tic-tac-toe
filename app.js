@@ -418,6 +418,31 @@ const displayController = (function () {
       playerTwoSymbol.appendChild(para);
     });
 
+    playComputer.addEventListener("click", function (e) {
+      player2Selection.style.display = "none";
+      const name = 'Computer';
+      let symbol;
+      if (playersArr[0].symbol == "x") {
+        symbol = "o";
+      } else symbol = "x";
+      const type = "computer";
+      Player(name, symbol, type);
+      welcomePlayer2();
+      if (symbol = 'x') {
+        const board = gameBoard.getBoard();
+        compRow = Math.floor(Math.random() * 3);
+        compCol =  Math.floor(Math.random() * 3);
+        while (board[compRow][compCol] === "x" ||
+        board[compRow][compCol] === "o") {
+          compRow = Math.floor(Math.random() * 3);
+        compCol =  Math.floor(Math.random() * 3)
+        }
+        gameController.playRound(compRow, compCol);
+        updateBoard();
+        gameController.decideWinner();
+      }
+    })
+
     // Add player 2
 
     form2.addEventListener("submit", function (e) {
@@ -428,7 +453,7 @@ const displayController = (function () {
       if (playersArr[0].symbol == "x") {
         symbol = "o";
       } else symbol = "x";
-      const type = "computer"; // ⚠️ CHANGE TO HUMAN!!!!!!!
+      const type = "human"; // ⚠️ CHANGE TO HUMAN!!!!!!!
       Player(name, symbol, type);
       welcomePlayer2();
     });
