@@ -11,3 +11,9 @@ Tic Tac Toe game for the <a href="https://www.theodinproject.com/lessons/node-pa
 - JS && and || statements
 - Font imports
 - Computer or human play functionality
+
+## Future ideas
+
+- Make light/dark mode
+- Make the computer unbeatable (or close to it)
+- Make phone friendly

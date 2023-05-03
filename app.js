@@ -144,7 +144,7 @@ const gameController = (function () {
       const title = document.querySelector("#title");
       const h1 = document.createElement("h1");
       h1.innerHTML = `Congratulations! <br />${getCurrentPlayerName()} won!`;
-      h1.classList.add("pt-6", "text-7xl");
+      h1.classList.add("pt-6", "sm:text-7xl", "text-4xl");
       const btn = document.createElement("button");
       btn.textContent = "Play again?";
       btn.classList.add(
@@ -472,4 +472,3 @@ const displayController = (function () {
     }
   })();
 })();
-``;
