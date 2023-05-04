@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./app.js", "./node_modules/flowbite/**/*.js"],
+  content: ["./index.html", "./app.js"],
   theme: {
     fontFamily: {
       sans: [
@@ -31,6 +31,5 @@ export default {
       },
     },
   },
-  plugins: [require("flowbite/plugin")],
   darkMode: "class",
 };
